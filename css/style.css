@@ -368,12 +368,12 @@ input:checked + label {
     position: fixed;
     top: 0;
     left: 0;
-    /* height: 100%; */
-    height: 5rem;
+    height: 100%;
     width: 100%;
     z-index: 10;
     background: linear-gradient(135deg, rgba(70, 206, 224, 1) 30%, rgba(73, 142, 221, 1) 99%);
     box-shadow: 0 5px 10px rgba(17, 17, 17, 0.993), inset 0px -2px 5px var(--color-black);
+    animation: animate-header 3s 2s ease forwards;
 }
 
 .header-container {
