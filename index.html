@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tic Tac Toe using Alpha Beta Prunning Algorithm implemented using Javascript">
+    <title>Tic Tac Toe</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    
+    <header class="page-header block-center">
+        <div class="header-container">
+            <h1>tic <span>tac</span> toe</h1>
+        </div>
+    </header>
+
+    <!-- 
+        EFFECTS 
+    -->
+
+    <div class="effect effect-o-1"></div>
+    <div class="effect effect-o-3">
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="effect effect-o-4"></div>
+    <div class="effect effect-o-5"></div>
+    <div class="effect effect-o-6">
+        <div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="effect effect-x-8">
+        <div class="x-1"></div>
+        <div class="x-2"></div>
+    </div>
+
+
+    <!-- 
+        INPUT SECTION 
+    -->
+<main>
+    <section class="set-player-section block-center" id="set-player-section">
+        <form action="">
+            <div class="select-mark">
+                <p class="info"><span>Which are you:</span></p>
+                <div class="input-div">
+                    <input type="radio" name="mark" id="mark-o" checked>
+                    <label for="mark-o">O</label>
+                </div>
+                <div class="input-div">
+                    <input type="radio" name="mark" id="mark-x">
+                    <label for="mark-x">X</label>
+                </div>
+            </div>
+    
+            <div class="opponent">
+                <p class="info"><span>Select your opponent:</span></p>
+                <div class="input-div">
+                    <input type="radio" name="opponent-select" id="ai" checked>
+                    <label for="ai">Computer</label>
+                </div>
+                <div class="input-div">
+                    <input type="radio" name="opponent-select" id="frnd">
+                    <label for="frnd">1o1 Friend</label>
+                </div>
+            </div>
+    
+            <div class="ai-level">
+                <p class="info"><span>Select the level:</span></p>
+                <div class="input-div easy" id="E">
+                    <input type="radio" name="level" id="easy" value="easy">
+                    <label for="easy">Easy-Peasey</label>
+                </div>
+                <div class="input-div med" id="M">
+                    <input type="radio" name="level" id="medium" value="medium" checked>
+                    <label for="medium">Ok-Ok</label>
+                </div>
+                <div class="input-div impossible" id="I">
+                    <input type="radio" name="level" id="impossible" value="impossible">
+                    <label for="impossible">Way Thorny</label>
+                </div>          
+            </div>
+    
+            <div class="input-name">
+                <p class="info"><span>Enter your names:</span></p>
+                <div class="name">
+                    <div class="input-div for-name1">
+                        <input type="text" name="name1" id="name1" placeholder="Enter your name" onfocusout="nameFunction()">
+                        <label class="name1-label" for="name1">Player 1</label>
+                    </div>
+                    <div class="input-div for-name2">
+                        <input type="text" name="name2" id="name2" placeholder="Enter your name" onfocusout="nameFunction()">
+                        <label class="name2-label" for="name2">Player 2</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-div">
+                <button type="button" class="btn play-btn" id="play-btn"> Play </button>
+            </div>
+            
+        </form>
+        
+    </section>
+
+
+    <!-- 
+        GAME SECTION
+     -->
+
+    <section class="game-section block-center" id="game-section">
+
+        <div class="game-info">
+            <div class="game-matches">
+                Matches : <span class="match-count">0</span>
+            </div>
+            <div class="game-level">
+                Level : <span class="diff-level">Easy</span>
+            </div>
+            <div class="game-draw">
+                Draws : <span class="match-draw-score">0</span>
+            </div>
+        </div>
+
+        <div class="game-box">
+            <div class="game-msg"></div>
+
+            <div class="game-container">
+                <div class="game-grid">
+                    <div class="game-cell" id="0"> </div>
+                    <div class="game-cell" id="1"> </div>
+                    <div class="game-cell" id="2"> </div>
+                    <div class="game-cell" id="3"> </div>
+                    <div class="game-cell" id="4"> </div>
+                    <div class="game-cell" id="5"> </div>
+                    <div class="game-cell" id="6"> </div>
+                    <div class="game-cell" id="7"> </div>
+                    <div class="game-cell" id="8"> </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="score-board">
+            <div id="player1">
+                <div class="score">
+                    <span class="player1-mark">X</span> 
+                    : 
+                    <span class="player1-score" >0</span>
+                </div>
+                <div class="player1-name"> Player 1 </div>
+            </div>
+
+            <div class="time">
+                <div>
+                    <span class="match-time">0 : 0</span>
+                </div>
+                <div class="time-name">Time</div>
+
+                <div class="semi-left"></div>
+                <div class="semi-right"></div>
+            </div>
+
+            <div class="player2" id="player2">
+                <div class="score">
+                    <span class="player2-mark">O</span> 
+                    : 
+                    <span class="player2-score">0</span>
+                </div>
+                <div class="player2-name">Player 2</div>
+            </div>
+
+        </div>
+
+        <div class="game-options">
+            <button class="btn to-main" id="to-main">Main Menu</button>
+            <button class="btn" id="next-match">Next Match</button>
+        </div>
+
+    </section>
+
+
+
+
+
+</main>
+    <script src="./js/script.js"></script>
+</body>
+</html>
